@@ -5,6 +5,9 @@
 #include <cstdlib>
 #include <ctime>
 
+//Project Includes
+#include "AssetManager.h"
+
 int main()
 {
 	//****************************
@@ -19,6 +22,13 @@ int main()
 	sf::Time timeLimit = sf::seconds(10.0f);
 	sf::Time timeRemaining = timeLimit;
 	sf::Clock gameClock;
+
+	// Create AssetManager
+	AssetManager assets;
+
+	// Testing AssetManager
+	sf::Sprite TestSprite;
+	TestSprite.setTexture(AssetManager::GetTexture("graphics/playerJump.png"));
 
 	// *****************
 	// *** END SETUP ***
@@ -57,7 +67,7 @@ int main()
 	// *****************
 
 		gamewindow.clear();
-
+		gamewindow.draw(TestSprite);
 		gamewindow.display();
 
 	// *** END DRAW ***
