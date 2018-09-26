@@ -33,6 +33,10 @@ int main()
 	sf::Sound testSound;
 	testSound.setBuffer(AssetManager::GetSoundBuffer("audio/death.wav"));
 	testSound.play();
+
+	sf::Text testFont;
+	testFont.setFont(AssetManager::GetFont("fonts/mainFont.ttf"));
+	testFont.setString("BORK BORK");
 	
 	// *****************
 	// *** END SETUP ***
@@ -73,6 +77,7 @@ int main()
 
 		gamewindow.clear();
 		gamewindow.draw(TestSprite);
+		gamewindow.draw(testFont);
 		gamewindow.display();
 
 	// *** END DRAW ***

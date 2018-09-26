@@ -80,3 +80,34 @@ sf::SoundBuffer& AssetManager::GetSoundBuffer(std::string _fileName)
 		return soundBuffer;
 	}
 }
+
+
+
+sf::Font& AssetManager::GetFont(std::string _fileName)
+{
+	//creat an iterator to hold key value
+	auto keyValuePair = s_instance->m_fonts.find(_fileName);
+	// "auto" can be used when the compiler can figure out the type of variable for you
+	// NOT ALLOWED TO USE THIS EXCEPT FOR ITERATIORS
+
+	// Was sound already loaded?
+	if (keyValuePair != s_instance->m_fonts.end())
+	{
+		// Yes
+		return keyValuePair->second;
+	}
+	else
+	{
+		// No
+		// Create a new key value Pair using the filename
+		// the subscript [] creates am entry in the map
+
+		sf::Font& font = s_instance->m_fonts[_fileName];
+		// Blank sound loaded
+		// load using SFML
+		font.loadFromFile(_fileName);
+
+		// return the sound
+		return font;
+	}
+}
