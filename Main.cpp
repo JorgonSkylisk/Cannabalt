@@ -44,6 +44,10 @@ int main()
 	TestAnimation.SetSprite(TestSprite);
 	TestAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun1.png"));
 	TestAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun2.png"));
+	TestAnimation.SetLoop(true);
+	TestAnimation.SetPlaybackSpeed(10.0f);
+	TestAnimation.Play();
+
 
 	// *****************
 	// *** END SETUP ***
