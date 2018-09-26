@@ -7,6 +7,7 @@
 
 //Project Includes
 #include "AssetManager.h"
+#include "Animation.h"
 
 int main()
 {
@@ -37,7 +38,13 @@ int main()
 	sf::Text testFont;
 	testFont.setFont(AssetManager::GetFont("fonts/mainFont.ttf"));
 	testFont.setString("BORK BORK");
-	
+
+	// Add Testing section for animation
+	Animation TestAnimation;
+	TestAnimation.SetSprite(TestSprite);
+	TestAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun1.png"));
+	TestAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun2.png"));
+
 	// *****************
 	// *** END SETUP ***
 	// *****************
@@ -67,6 +74,7 @@ int main()
 	//******** UPDATE ********
 	//************************
 		sf::Time frameTime = gameClock.restart();
+		TestAnimation.Update(frameTime);
 	
 
 	// *** END UPDATE ***
