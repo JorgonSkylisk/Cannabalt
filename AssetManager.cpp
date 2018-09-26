@@ -50,3 +50,33 @@ sf::Texture& AssetManager::GetTexture(std::string _fileName)
 		return texture;
 	}
 }
+
+
+sf::SoundBuffer& AssetManager::GetSoundBuffer(std::string _fileName)
+{
+	//creat an iterator to hold key value
+	auto keyValuePair = s_instance->m_soundbuffers.find(_fileName);
+	// "auto" can be used when the compiler can figure out the type of variable for you
+	// NOT ALLOWED TO USE THIS EXCEPT FOR ITERATIORS
+
+	// Was sound already loaded?
+	if (keyValuePair != s_instance->m_soundbuffers.end())
+	{
+		// Yes
+		return keyValuePair->second;
+	}
+	else
+	{
+		// No
+		// Create a new key value Pair using the filename
+		// the subscript [] creates am entry in the map
+
+		sf::SoundBuffer& soundBuffer = s_instance->m_soundbuffers[_fileName];
+		// Blank sound loaded
+		// load using SFML
+		soundBuffer.loadFromFile(_fileName);
+
+		// return the sound
+		return soundBuffer;
+	}
+}

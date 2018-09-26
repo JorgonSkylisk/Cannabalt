@@ -10,9 +10,9 @@
 
 int main()
 {
-	//****************************
-	//******** GAME SETUP ********
-	//****************************
+	// ****************************
+	// ******** GAME SETUP ********
+	// ****************************
 	// Declare variable for display window
 	sf::RenderWindow gamewindow;
 	gamewindow.create(sf::VideoMode::getDesktopMode(), "Button Masher",
@@ -29,15 +29,19 @@ int main()
 	// Testing AssetManager
 	sf::Sprite TestSprite;
 	TestSprite.setTexture(AssetManager::GetTexture("graphics/playerJump.png"));
-
+	
+	sf::Sound testSound;
+	testSound.setBuffer(AssetManager::GetSoundBuffer("audio/death.wav"));
+	testSound.play();
+	
 	// *****************
 	// *** END SETUP ***
 	// *****************
 
 
-	//*************************
-	//******* game loop *******
-	//*************************
+	// *************************
+	// ******* game loop *******
+	// *************************
 	while (gamewindow.isOpen())
 
 	{
@@ -59,6 +63,7 @@ int main()
 	//******** UPDATE ********
 	//************************
 		sf::Time frameTime = gameClock.restart();
+	
 
 	// *** END UPDATE ***
 		
