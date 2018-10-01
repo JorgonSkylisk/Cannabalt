@@ -7,6 +7,7 @@
 
 class AnimationSystem
 {
+public:
 
 	AnimationSystem();
 

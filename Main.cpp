@@ -8,6 +8,8 @@
 //Project Includes
 #include "AssetManager.h"
 #include "Animation.h"
+#include "AnimationSystem.h"
+
 
 int main()
 {
@@ -40,13 +42,20 @@ int main()
 	testFont.setString("BORK BORK");
 
 	// Add Testing section for animation
-	Animation TestAnimation;
-	TestAnimation.SetSprite(TestSprite);
+	AnimationSystem testAnimationSystem;
+	testAnimationSystem.SetSprite(TestSprite);
+
+
+	Animation& TestAnimation = testAnimationSystem.CreateAnimation("run");
 	TestAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun1.png"));
 	TestAnimation.AddFrame(AssetManager::GetTexture("graphics/playerRun2.png"));
 	TestAnimation.SetLoop(true);
 	TestAnimation.SetPlaybackSpeed(10.0f);
-	TestAnimation.Play();
+
+	Animation& jumpAnimation = testAnimationSystem.CreateAnimation("jump");
+	jumpAnimation.AddFrame(AssetManager::GetTexture("graphics/playerJump.png"));
+
+	testAnimationSystem.Play("run");
 
 
 	// *****************
@@ -78,7 +87,7 @@ int main()
 	//******** UPDATE ********
 	//************************
 		sf::Time frameTime = gameClock.restart();
-		TestAnimation.Update(frameTime);
+		testAnimationSystem.Update(frameTime);
 	
 
 	// *** END UPDATE ***
