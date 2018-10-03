@@ -8,6 +8,7 @@
 //Project Includes
 #include "AssetManager.h"
 #include "Player.h"
+#include "Platform.h"
 
 int main()
 {
@@ -27,11 +28,19 @@ int main()
 	// Create AssetManager
 	AssetManager assets;
 
+	// Seed RNG
+	srand(time(NULL));
+
+	// Create Player
 	Player player;
 	player.Spawn();
 
 	// Create Camera
 	sf::View Camera = gamewindow.getDefaultView();
+
+	// Create platform
+	Platform platform;
+	platform.Spawn();
 
 
 	// *****************
@@ -90,6 +99,7 @@ int main()
 		//draw game world using camera
 		gamewindow.setView(Camera);
 		player.Draw(gamewindow);
+		platform.Draw(gamewindow);
 		
 		//draw UI to the window
 		gamewindow.setView(gamewindow.getDefaultView());
