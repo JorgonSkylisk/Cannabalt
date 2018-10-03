@@ -9,7 +9,7 @@
 #define JUMP_SPEED -1500.0f
 #define RUN_SPEED_INITIAL 500.0f
 #define GRAVITY 2000.0f
-//#define RUN_ACCEL 100.0f
+
 
 Player::Player():
 	m_sprite(),
@@ -90,4 +90,9 @@ void Player::Spawn()
 	m_animation.Play("jump");
 	m_Velocity.y = 0;
 	m_Velocity.x = RUN_SPEED_INITIAL;
+}
+
+sf::Vector2f Player::GetPosition()
+{
+	return m_sprite.getPosition();
 }
