@@ -78,7 +78,11 @@ int main()
 		
 		//process game objects
 		player.Update(frameTime);
+
+		// Collision
+		player.handleCollision(platform.GetCollider());
 	
+
 		// Update cam pos
 		Camera.setCenter(player.GetPosition().x + Camera.getSize().x * 0.4f, Camera.getCenter().y);
 

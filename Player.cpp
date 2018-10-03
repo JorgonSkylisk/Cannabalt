@@ -52,6 +52,7 @@ void Player::Input(sf::Event _gameEvent)
 		{
 			//play jump sound
 			m_jumpSound.play();
+			m_animation.Play("jump");
 			// set upward velocity
 			m_Velocity.y = JUMP_SPEED;
 		}
@@ -65,10 +66,12 @@ void Player::Update(sf::Time _frameTime)
 	// Process animation
 	m_animation.Update(_frameTime);
 	
-	// Gravity to velocity
-	float velocityChange = GRAVITY * _frameTime.asSeconds();
-	m_Velocity.y += velocityChange;
-
+	if (m_touchingGround == false)
+	{
+		// Gravity to velocity
+		float velocityChange = GRAVITY * _frameTime.asSeconds();
+		m_Velocity.y += velocityChange;
+	}
 	// move sprite based on velocity
 	sf::Vector2f currentPosition = m_sprite.getPosition();
 	sf::Vector2f postionChange = m_Velocity * _frameTime.asSeconds();
@@ -95,4 +98,51 @@ void Player::Spawn()
 sf::Vector2f Player::GetPosition()
 {
 	return m_sprite.getPosition();
+}
+
+void Player::handleCollision(sf::FloatRect _platform)
+{
+	//assume not touching anything
+	bool hadCollision = false;
+
+	//Collider for player
+	sf::FloatRect PlayerCollider = m_sprite.getGlobalBounds();
+	//does sprite intersect platform
+	if (PlayerCollider.intersects(_platform))
+	{
+		// YE
+		// Check if feet are touching top of platform and are falling
+		sf::FloatRect FeetCollider = PlayerCollider;
+		// Sett feet 10 pixels up from bottom of collider
+		FeetCollider.top += PlayerCollider.height - 10;
+		//set feet collider height to 10
+		FeetCollider.height = 10;
+
+		sf::FloatRect platformtop = _platform;
+		platformtop.height = 10;
+
+		// Are feet and platform top colliding
+		if (FeetCollider.intersects(platformtop))
+		{
+			hadCollision = true;
+			
+			if (m_Velocity.y > 0)
+			{
+				if (m_touchingGround == false)
+				{
+					//touching ground
+					m_animation.Play("run");
+					m_landSound.play();
+					m_Velocity.y = 0;
+					m_touchingGround = true;
+				}
+			}
+
+		}
+
+	}
+	if (hadCollision == false)
+	{
+		m_touchingGround = false;
+	}
 }

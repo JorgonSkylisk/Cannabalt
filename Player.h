@@ -20,6 +20,8 @@ public:
 
 	sf::Vector2f GetPosition();
 
+	void handleCollision(sf::FloatRect _platform);
+
 private:
 	// Assets
 	sf::Sprite m_sprite;
@@ -31,7 +33,7 @@ private:
 
 	// State
 	sf::Vector2f m_Velocity;
-
+	bool m_touchingGround;
 
 
 };

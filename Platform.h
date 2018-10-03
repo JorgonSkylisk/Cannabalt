@@ -14,6 +14,7 @@ public:
 
 	void Spawn();
 
+	sf::FloatRect GetCollider();
 private:
 	sf::Sprite m_sprite;
 
